@@ -95,32 +95,31 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final PreferredSizeWidget appBar = Platform.isIOS
-        ? CupertinoNavigationBar(
-            middle: Text(
-              'Daily Expenses',
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                GestureDetector(
-                  child: Icon(CupertinoIcons.add),
-                  onTap: () => _startAddNewTransaction(context),
-                )
-              ],
-            ),
+    final cupertinoBar = CupertinoNavigationBar(
+      middle: Text(
+        'Daily Expenses',
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          GestureDetector(
+            child: Icon(CupertinoIcons.add),
+            onTap: () => _startAddNewTransaction(context),
           )
-        : AppBar(
-            title: Text(
-              'Daily Expenses',
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () => _startAddNewTransaction(context),
-              )
-            ],
-          );
+        ],
+      ),
+    );
+    final appBar = AppBar(
+      title: Text(
+        'Daily Expenses',
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        )
+      ],
+    );
     final txListWidget = Container(
         height: (mediaQuery.size.height -
                 appBar.preferredSize.height -
@@ -177,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Platform.isIOS
         ? CupertinoPageScaffold(
             child: pageBody,
-            navigationBar: appBar,
+            navigationBar: cupertinoBar,
           )
         : Scaffold(
             appBar: appBar,
